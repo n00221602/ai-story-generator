@@ -17,6 +17,8 @@
             <a href="index.html" class="btn btn-sm btn-ghost">Short Story</a>
             <div class="divider divider-horizontal mx-0"></div>
             <a href="story-concept.html" class="btn btn-sm btn-ghost btn-active">Story Concept</a>
+            <div class="divider divider-horizontal mx-0"></div>
+            <a href="character-creator.html" class="btn btn-sm btn-ghost">Character Creator</a>
         </div>
         <div class="navbar-end"></div>
     </div>
@@ -27,9 +29,9 @@
     <div class="container max-w-3xl mx-auto px-4 pt-8 pb-12">
 
         <div class="text-center mb-8">
-            <h1 class="text-6xl font-extrabold text-primary mb-3">
+            <h1 class="text-6xl font-extrabold text-sky-500 mb-3">
                 Story Concept Generator</h1>
-            <p class="text-xl text-gray-700">Generate a story concept by defining the setting, theme, and mood through
+            <p class="text-xl text-gray-700">Generate a story concept by defining the setting, theme, and genre through
                 images.</p>
         </div>
 
@@ -37,35 +39,24 @@
             <div class="card-body">
                 <form class="space-y-6">
                     <div class="form-control w-full">
-                        <label class="label" for="settingUrl">
-                            <span class="label-text font-semibold text-lg">Setting Image URL:</span>
+                        <label class="label" for="imageUrl1">
+                            <span class="label-text font-semibold text-lg">Setting:</span>
                         </label>
                         <div class="grid grid-cols-10 gap-2">
-                            <input type="text" class="input input-bordered col-span-8" id="settingUrl"
+                            <input type="text" class="input input-bordered col-span-8" id="imageUrl1"
                                 placeholder="Where does the story take place?" />
-                            <button type="button" class="btn btn-md col-span-2" onclick="searchSetting()">View</button>
+                            <button type="button" class="btn btn-md col-span-2" onclick="searchUrl1()">View</button>
                         </div>
                     </div>
 
                     <div class="form-control w-full">
-                        <label class="label" for="themeUrl">
-                            <span class="label-text font-semibold text-lg">Theme Image URL:</span>
+                        <label class="label" for="imageUrl2">
+                            <span class="label-text font-semibold text-lg">Theme:</span>
                         </label>
                         <div class="grid grid-cols-10 gap-2">
-                            <input type="text" class="input input-bordered col-span-8" id="themeUrl"
+                            <input type="text" class="input input-bordered col-span-8" id="imageUrl2"
                                 placeholder="What is the central theme?" />
-                            <button type="button" class="btn btn-md col-span-2" onclick="searchTheme()">View</button>
-                        </div>
-                    </div>
-
-                    <div class="form-control w-full">
-                        <label class="label" for="moodUrl">
-                            <span class="label-text font-semibold text-lg">Mood Image URL:</span>
-                        </label>
-                        <div class="grid grid-cols-10 gap-2">
-                            <input type="text" class="input input-bordered col-span-8" id="moodUrl"
-                                placeholder="What's the overall atmosphere?" />
-                            <button type="button" class="btn btn-md col-span-2" onclick="searchMood()">View</button>
+                            <button type="button" class="btn btn-md col-span-2" onclick="searchUrl2()">View</button>
                         </div>
                     </div>
 
