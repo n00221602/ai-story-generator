@@ -1,3 +1,4 @@
+//These functions are used to open image URLs in a new tab when the user clicks on the view button in the form.
 function searchUrl1() {
   const url = document.getElementById('imageUrl1').value;
   window.open(url);
@@ -20,18 +21,20 @@ function searchUrl5() {
 }
 
 async function getShortStory() {
-  // Show loading message
+  //Displays a temporary loading message and spinner
   document.getElementById("response-text").textContent = "Generating story...";
   document.getElementById("loadingSpinner").style.display = "block";
   
   try {
+    //Assigns input values from the form
     const imageUrl1 = document.getElementById("imageUrl1").value;
     const imageUrl2 = document.getElementById("imageUrl2").value;
     const imageUrl3 = document.getElementById("imageUrl3").value;
     const genre = document.getElementById("genre").value;
 
+    //Send POST request to n8n webhook with a JSON body
     const response = await axios.post(
-      "http://localhost:5678/webhook-test/image-story",
+      "http://localhost:5678/webhook/image-story",
       {
         images: [
           { url: imageUrl1 }, 
@@ -42,34 +45,35 @@ async function getShortStory() {
         option: "short-story"
       }
     );
-    console.log("Response:", response.data);
+    
+    //Once the response is received, clear the loading message and spinner
     document.getElementById("response-text").textContent = "";
     document.getElementById("loadingSpinner").style.display = "none";
 
+    //Display the generated story on the form page, converting newline characters to HTML line breaks
     document.getElementById("response-text").innerHTML = response.data.output.replace(/\n/g, "<br>");
-
     return response.data;
+    
   } catch (error) {
     console.error("Error fetching image story:", error.message);
-    // if (error.response) {
-    //   console.error('Status:', error.response.status);
-    //   console.error('Data:', error.response.data);
-    // }
+    document.getElementById("response-text").textContent = "Error has occured. Please try again.";
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
-
 async function getStoryConcept() {
-  // Show loading message
+  //Displays a temporary loading message and spinner
   document.getElementById("response-text").textContent = "Generating concept...";
   document.getElementById("loadingSpinner").style.display = "block";
   
   try {
+    //Assigns input values from the form
     const imageUrl1 = document.getElementById("imageUrl1").value;
     const imageUrl2 = document.getElementById("imageUrl2").value;
     const genre = document.getElementById("genre").value;
 
+    //Send POST request to n8n webhook with a JSON body
     const response = await axios.post(
-      "http://localhost:5678/webhook-test/image-story",
+      "http://localhost:5678/webhook/image-story",
       {
         images: [
           { url1: imageUrl1 }, 
@@ -79,33 +83,38 @@ async function getStoryConcept() {
         option: "story-concept"
       }
     );
-    console.log("Response:", response.data);
+    
+    //Once the response is received, clear the loading message and spinner
     document.getElementById("response-text").textContent = "";
     document.getElementById("loadingSpinner").style.display = "none";
 
+    //Display the generated story on the form page, converting newline characters to HTML line breaks
     document.getElementById("response-text").innerHTML = response.data.output.replace(/\n/g, "<br>");
 
     return response.data;
+
   } catch (error) {
     console.error("Error fetching story concept:", error.message);
+    document.getElementById("response-text").textContent = "Error has occured. Please try again.";
     document.getElementById("loadingSpinner").style.display = "none";
   }
 }
-
 async function getCharacter() {
-  // Show loading message
+  //Displays a temporary loading message and spinner
   document.getElementById("response-text").textContent = "Generating character...";
   document.getElementById("loadingSpinner").style.display = "block";
   
   try {
+    //Assigns input values from the form
     const imageUrl1 = document.getElementById("imageUrl1").value;
     const imageUrl2 = document.getElementById("imageUrl2").value;
     const imageUrl3 = document.getElementById("imageUrl3").value;
     const role = document.getElementById("role").value;
     const name = document.getElementById("name").value;
 
+    //Send POST request to n8n webhook with a JSON body
     const response = await axios.post(
-      "http://localhost:5678/webhook-test/image-story",
+      "http://localhost:5678/webhook/image-story",
       {
         name: name,
         images: [
@@ -117,18 +126,19 @@ async function getCharacter() {
         option: "character-creator"
       }
     );
-    console.log("Response:", response.data);
+    
+    //Once the response is received, clear the loading message and spinner
     document.getElementById("response-text").textContent = "";
     document.getElementById("loadingSpinner").style.display = "none";
 
+    //Display the generated story on the form page, converting newline characters to HTML line breaks
     document.getElementById("response-text").innerHTML = response.data.output.replace(/\n/g, "<br>");
 
     return response.data;
+
   } catch (error) {
     console.error("Error fetching image story:", error.message);
-    // if (error.response) {
-    //   console.error('Status:', error.response.status);
-    //   console.error('Data:', error.response.data);
-    // }
+    document.getElementById("response-text").textContent = "Error has occured. Please try again.";
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }

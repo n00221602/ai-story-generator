@@ -1,0 +1,1215 @@
+{
+  "name": "Image to Story Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2912,
+        -64
+      ],
+      "id": "0b57628b-bab7-43f0-8181-1f11faeb0149",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "image-story",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        144,
+        -144
+      ],
+      "id": "c24e09be-aa39-4409-894f-435262fa04b2",
+      "name": "Webhook",
+      "webhookId": "4ea81f30-23f0-46fb-9068-7e375e8084b1"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "descriptions",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1744,
+        -688
+      ],
+      "id": "d47fe7cd-767f-4e1a-8fec-ff09aa529a0b",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "dbb2ff9d-00c5-40ae-8368-950573627826",
+              "leftValue": "={{ $json.url1 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1248,
+        -48
+      ],
+      "id": "200a2cd7-3c9d-4b67-b184-9325b90934cb",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1728,
+        -144
+      ],
+      "id": "87802864-a0a2-40a5-883a-206aaab2cfa2",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.option }}",
+                    "rightValue": "short-story",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "cc1ef9f8-0f0b-4604-baa3-dfc4d3e2562d"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "91214781-ac74-4a4f-9410-f20044817669",
+                    "leftValue": "={{ $json.body.option }}",
+                    "rightValue": "story-concept",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c524af20-74b9-4d2c-b503-852a12dd0412",
+                    "leftValue": "={{ $json.body.option }}",
+                    "rightValue": "character-creator",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        -160
+      ],
+      "id": "c02228d4-e310-48a8-8b9c-e02c4e4b9b9e",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.url1 }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "951683e7-9252-45ed-a66f-0fc3d80111ef"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b4c9d6f5-c009-4a40-8fd5-5a7922ad0b8b",
+                    "leftValue": "={{ $json.url2 }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "dca857f9-3846-48e4-b959-ae076f682b36",
+                    "leftValue": "={{ $json.url3 }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1248,
+        688
+      ],
+      "id": "f90fd2d7-2a62-433e-bd83-d279423dcdf5",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "Describe the appearance of this character",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1712,
+        768
+      ],
+      "id": "ccc5711f-ef23-4e6f-80d1-bf21ff613eea",
+      "name": "Analyse Appearance Image",
+      "credentials": {
+        "openAiApi": {
+          "id": "k1qGrZLgNrttLnMm",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "What personality traits match this image?",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1712,
+        960
+      ],
+      "id": "bb532d1d-d6be-4d11-ac9e-423d06f9aa33",
+      "name": "Analyse Personality Image",
+      "credentials": {
+        "openAiApi": {
+          "id": "k1qGrZLgNrttLnMm",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url1 }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1440,
+        768
+      ],
+      "id": "247142ad-5338-44f9-83f9-5d8e61512a78",
+      "name": "Convert Appearance URL"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url2 }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1440,
+        960
+      ],
+      "id": "7266726b-ccf3-4ca2-91f5-f748e12ec3c8",
+      "name": "Convert Personality URL"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "character",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        608
+      ],
+      "id": "eb82f132-fa8c-480d-b6e2-e8f13c67d5ff",
+      "name": "Aggregate2"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url3 }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1440,
+        1152
+      ],
+      "id": "ca0541c4-9dfd-4185-9036-ec2f3c75a67c",
+      "name": "Convert Background URL"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "What do you see in this image?",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1712,
+        1152
+      ],
+      "id": "60c49e9e-c82b-4772-a3fc-50724b04dc0d",
+      "name": "Analyse Background Image",
+      "credentials": {
+        "openAiApi": {
+          "id": "k1qGrZLgNrttLnMm",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        4176,
+        -448
+      ],
+      "id": "32450ed5-fa00-4f2d-85ad-d0fada8b186e",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-NANO"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Write a short 150 word {{ $('Webhook').item.json.body.genre }} story based on the image descriptions provided. Make a paragraph for each image, and separate them with a line break {{ $json.descriptions[0][0].content[0].text }}, {{ $json.descriptions[1][0].content[0].text }}, {{ $json.descriptions[2][0].content[0].text }}."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        2144,
+        -400
+      ],
+      "id": "b3611c32-abfe-46b0-94ae-542de927e20d",
+      "name": "Short Story Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "k1qGrZLgNrttLnMm",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-NANO"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Generate a concept idea for a {{ $('Webhook').item.json.body.genre }} story that can be used by a professional writer to create their own story. The formatting should have headings describing the possible theme and setting. Also include a small 30-50 word paragraph for a potential story idea. Create this concept using the following descriptions: Theme: {{ $json.data[0][0].content[0].text }}, Setting: {{ $json.data[1][0].content[0].text }}."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        2144,
+        -48
+      ],
+      "id": "0167709a-8da8-4a0c-a1ef-524561498504",
+      "name": "Story Concept Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "k1qGrZLgNrttLnMm",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-NANO"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Create a brief and consise character sheet using the headings and descriptions provided. Add a single line break after each heading and double line breaks at the end of each section. For the Background section, start with this sentence: \" This character comes from\". Name: {{ $('Webhook').item.json.body.name }}, Role: {{ $('Webhook').item.json.body.role }}, Appearance: {{ $json.character[0][0].content[0].text }}, Personality: {{ $json.character[1][0].content[0].text }}, Background: {{ $json.character[2][0].content[0].text }}."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        2128,
+        288
+      ],
+      "id": "53114254-74dd-4ac1-a9ba-e2be798f5fac",
+      "name": "Character Creator Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "k1qGrZLgNrttLnMm",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url1 }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1456,
+        -64
+      ],
+      "id": "8e190607-360c-48ec-a8af-ea91f79ce36f",
+      "name": "Convert Theme URL"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url2 }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1456,
+        80
+      ],
+      "id": "cec220a3-9125-441a-a4df-0fd57d81c6fb",
+      "name": "Convert Setting URL"
+    },
+    {
+      "parameters": {
+        "jsCode": "return $json.body.images"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        864,
+        608
+      ],
+      "id": "f661ad16-01c0-4136-b007-5903803b3122",
+      "name": "Return Character Images"
+    },
+    {
+      "parameters": {
+        "jsCode": "return $json.body.images"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        752,
+        -144
+      ],
+      "id": "30bcda08-e026-468a-97c7-cad92f253757",
+      "name": "Return Concept Images"
+    },
+    {
+      "parameters": {
+        "jsCode": "return $json.body.images"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        944,
+        -736
+      ],
+      "id": "2dfe94ab-99ed-484f-9fd9-97342397bfe7",
+      "name": "Return Story Images"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1216,
+        -752
+      ],
+      "id": "526773a3-4570-4cf8-b489-cd67bda921f7",
+      "name": "Loop Over Story Images"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1056,
+        -128
+      ],
+      "id": "2756f2a5-6867-4da8-a372-36b2d79f3ef2",
+      "name": "Loop Over Concept Images"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1088,
+        592
+      ],
+      "id": "cf424fe8-5714-46cc-8c7c-588d7554e257",
+      "name": "Loop Over Character Images"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "Give a description of the image provided",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1536,
+        -528
+      ],
+      "id": "562527f5-833b-4a27-b7be-c42885d61463",
+      "name": "Analyze Story Image",
+      "credentials": {
+        "openAiApi": {
+          "id": "k1qGrZLgNrttLnMm",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1392,
+        -640
+      ],
+      "id": "3a9500a2-9480-4e78-b5df-93185dc2eca7",
+      "name": "Convert Story URL"
+    },
+    {
+      "parameters": {
+        "jsCode": "const output = $input.first().json.output[0].content[0].text;\n\nreturn { output }"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2688,
+        -64
+      ],
+      "id": "28a558c5-be30-49d6-a2e0-6cc697dcea2d",
+      "name": "Returns as output"
+    },
+    {
+      "parameters": {
+        "content": "## Character Creator",
+        "height": 80,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        528
+      ],
+      "id": "b39a7503-19c0-4380-9291-384fd8777262",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Story Concept Generator",
+        "height": 80,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        -208
+      ],
+      "id": "c3bc30f7-b11d-4378-bb0c-a0dc298e3839",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Short Story Generator",
+        "height": 80,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        -848
+      ],
+      "id": "7badc448-8f0e-4d77-bf28-462c619ea363",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "What is the theme is this image?",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1696,
+        32
+      ],
+      "id": "1a178a2a-7f1c-4c1d-bdbb-7ae78694de7a",
+      "name": "Analyse Theme Image",
+      "credentials": {
+        "openAiApi": {
+          "id": "k1qGrZLgNrttLnMm",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "What is the setting of this image?",
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1696,
+        240
+      ],
+      "id": "9950b7a2-c865-4dd2-aaa7-141b8ba0216c",
+      "name": "Analyse Setting Image",
+      "credentials": {
+        "openAiApi": {
+          "id": "k1qGrZLgNrttLnMm",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Short Story Model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Convert Theme URL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert Setting URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Story Concept Model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Return Story Images",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Concept Images",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Character Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Convert Appearance URL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert Personality URL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert Background URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyse Appearance Image": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Character Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyse Personality Image": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Character Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Appearance URL": {
+      "main": [
+        [
+          {
+            "node": "Analyse Appearance Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Personality URL": {
+      "main": [
+        [
+          {
+            "node": "Analyse Personality Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate2": {
+      "main": [
+        [
+          {
+            "node": "Character Creator Model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Background URL": {
+      "main": [
+        [
+          {
+            "node": "Analyse Background Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyse Background Image": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Character Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Short Story Model": {
+      "main": [
+        [
+          {
+            "node": "Returns as output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Story Concept Model": {
+      "main": [
+        [
+          {
+            "node": "Returns as output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Character Creator Model": {
+      "main": [
+        [
+          {
+            "node": "Returns as output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Theme URL": {
+      "main": [
+        [
+          {
+            "node": "Analyse Theme Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Setting URL": {
+      "main": [
+        [
+          {
+            "node": "Analyse Setting Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Return Character Images": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Character Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Return Concept Images": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Concept Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Return Story Images": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Story Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Story Images": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert Story URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Concept Images": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Character Images": {
+      "main": [
+        [
+          {
+            "node": "Aggregate2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Story Image": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Story Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Story URL": {
+      "main": [
+        [
+          {
+            "node": "Analyze Story Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Returns as output": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyse Theme Image": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Concept Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyse Setting Image": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Concept Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5efe18fd-6675-43c4-afd8-6e11940d13d7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d70b3112e46244eb81f8da493258086d3e772c80b9cc479789cf6f2c2f283c9e"
+  },
+  "id": "XOGUhOR2XTe9I5Wp",
+  "tags": []
+}

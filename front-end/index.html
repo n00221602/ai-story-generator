@@ -4,62 +4,82 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Story Concept Generator</title>
+    <title>Short Story Generator</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-base-200 min-h-screen">
 
+    <!-- Fixed Navbar -->
     <div class="navbar bg-base-100 shadow-md fixed top-0 z-50 border-b border-base-300">
         <div class="navbar-start"></div>
         <div class="navbar-center">
-            <a href="index.html" class="btn btn-sm btn-ghost">Short Story</a>
+            <a href="index.html" class="btn btn-sm btn-ghost btn-active">Short Story</a>
             <div class="divider divider-horizontal mx-0"></div>
-            <a href="story-concept.html" class="btn btn-sm btn-ghost btn-active">Story Concept</a>
+            <a href="story-concept.html" class="btn btn-sm btn-ghost">Story Concept</a>
             <div class="divider divider-horizontal mx-0"></div>
             <a href="character-creator.html" class="btn btn-sm btn-ghost">Character Creator</a>
         </div>
         <div class="navbar-end"></div>
     </div>
 
-    <!-- Add padding to account for fixed navbar -->
+    <!-- Added div to make up for lost screen space taken by the fixed navbar -->
     <div class="pt-16"></div>
 
     <div class="container max-w-3xl mx-auto px-4 pt-8 pb-12">
 
+        <!-- Form Title and description -->
         <div class="text-center mb-8">
-            <h1 class="text-6xl font-extrabold text-sky-500 mb-3">
-                Story Concept Generator</h1>
-            <p class="text-xl text-gray-700">Generate a story concept by defining the setting, theme, and genre through
-                images.</p>
+            <h1 class="text-6xl font-extrabold text-green-500 mb-3">
+                Short Story Generator</h1>
+            <p class="text-xl text-gray-700">Generate a short story by inputting image URLs and a genre. The images
+                represent the beginning,
+                middle, and ending of the story.</p>
         </div>
 
+        <!-- Form -->
         <div class="card bg-base-100 shadow-2xl">
             <div class="card-body">
                 <form class="space-y-6">
+
+                    <!-- Start image URL input with view button -->
                     <div class="form-control w-full">
                         <label class="label" for="imageUrl1">
-                            <span class="label-text font-semibold text-lg">Setting:</span>
+                            <span class="label-text font-semibold text-lg">Start Image URL:</span>
                         </label>
                         <div class="grid grid-cols-10 gap-2">
                             <input type="text" class="input input-bordered col-span-8" id="imageUrl1"
-                                placeholder="Where does the story take place?" />
+                                placeholder="Beginning of the story" />
                             <button type="button" class="btn btn-md col-span-2" onclick="searchUrl1()">View</button>
                         </div>
                     </div>
 
+                    <!-- Middle image URL input with view button -->
                     <div class="form-control w-full">
                         <label class="label" for="imageUrl2">
-                            <span class="label-text font-semibold text-lg">Theme:</span>
+                            <span class="label-text font-semibold text-lg">Middle Image URL:</span>
                         </label>
                         <div class="grid grid-cols-10 gap-2">
                             <input type="text" class="input input-bordered col-span-8" id="imageUrl2"
-                                placeholder="What is the central theme?" />
+                                placeholder="Middle of the story" />
                             <button type="button" class="btn btn-md col-span-2" onclick="searchUrl2()">View</button>
                         </div>
                     </div>
 
+                    <!-- End image URL input with view button -->
+                    <div class="form-control w-full">
+                        <label class="label" for="imageUrl3">
+                            <span class="label-text font-semibold text-lg">End Image URL:</span>
+                        </label>
+                        <div class="grid grid-cols-10 gap-2">
+                            <input type="text" class="input input-bordered col-span-8" id="imageUrl3"
+                                placeholder="End of the story" />
+                            <button type="button" class="btn btn-md col-span-2" onclick="searchUrl3()">View</button>
+                        </div>
+                    </div>
+
+                    <!-- Genre dropdown menu -->
                     <div class="form-control w-full">
                         <label class="label" for="genre">
                             <span class="label-text font-semibold text-lg">Genre:</span>
@@ -79,16 +99,19 @@
             </div>
         </div>
 
-        <button class="btn btn-primary btn-lg w-full mt-6 shadow-lg" id="submitBtn" onclick="getStoryConcept()">
-            <span id="buttonText">Generate Concept</span>
+        <!-- Submit button -->
+        <button class="btn btn-primary btn-lg w-full mt-6 shadow-lg" id="submitBtn" onclick="getShortStory()">
+            <span id="buttonText">Generate Story</span>
             <span class="loading loading-spinner" id="loadingSpinner" style="display: none"></span>
         </button>
 
-        <div id="result" class="card bg-base-100 shadow-xl mt-8 p-6 min-h-32">
-            <p id="response-text" class="text-center text-base-content"></p>
+        <!-- Result is displayed within the card -->
+        <div id="result" class="card bg-base-100 shadow-xl mt-8 p-6">
+            <p id="response-text" class="text-center text-base-content">(Short story will appear here)</p>
         </div>
     </div>
 </body>
+<!-- Loads the link to the Axios library instead of importing it through javascript -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="index.js"></script>
 
